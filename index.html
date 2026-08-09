@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SearchTrace — UCC Search Evidence Pack Builder</title>
+  <meta name="description" content="Build a local JSON manifest and SHA-256 inventory from an official UCC search report and receipt. Files never leave your browser.">
+  <meta name="theme-color" content="#101b2b">
+  <meta property="og:title" content="SearchTrace — UCC Search Evidence Pack Builder">
+  <meta property="og:description" content="Organize an official UCC search report into a scoped, locally hashed evidence manifest.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://ustechautomations.github.io/ucc-search-evidence-pack/">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#builder">Skip to the builder</a>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="SearchTrace home">
+      <span class="brand-mark" aria-hidden="true">ST</span>
+      <span><strong>SearchTrace</strong><small>Evidence, organized and sealed.</small></span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#method">Method</a>
+      <a href="#scope">Scope</a>
+      <a class="nav-cta" href="#builder">Build a manifest</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero shell">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> For factor credit managers and small-lender operations leads</p>
+        <h1>Turn a UCC search report into a file anyone can verify later</h1>
+        <p class="hero-lede">You ran the official search and paid the fee. SearchTrace takes that report and its receipt and returns a dated, hash-verified package your credit committee, auditor, or counsel can open a year from now and check against itself. SearchTrace organizes and seals evidence you already hold; it is not a legal opinion, a certified government search, or proof that no filing exists.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#builder">Build the free manifest</a>
+          <a class="button secondary" href="#offer">See the $249 pack</a>
+        </div>
+        <p class="privacy-note"><span aria-hidden="true">●</span> Hashing and export happen in this browser. Nothing is uploaded.</p>
+      </div>
+
+      <aside class="evidence-card" aria-label="Evidence pack contents">
+        <div class="card-head"><span>Pack structure</span><span class="local-pill">Local first</span></div>
+        <ol>
+          <li><span>01</span><div><strong>Search scope</strong><small>Exact name, office, jurisdiction, through date</small></div></li>
+          <li><span>02</span><div><strong>Official output</strong><small>Report and filing-office receipt</small></div></li>
+          <li><span>03</span><div><strong>Byte identity</strong><small>SHA-256 and byte size for every file</small></div></li>
+          <li><span>04</span><div><strong>Boundaries</strong><small>What the pack does and does not establish</small></div></li>
+        </ol>
+      </aside>
+    </section>
+
+    <section class="risk-band">
+      <div class="shell risk-grid">
+        <div>
+          <p class="section-label">The gap this closes</p>
+          <h2>A loose PDF cannot establish its own provenance.</h2>
+        </div>
+        <p>A search report usually ends up as a loose PDF in someone's downloads folder, carrying no record of what was searched, at which office, through what date, what it cost, or whether the file changed after it arrived. When a facility gets questioned months later, the person who ran the search may no longer be there, and the report cannot establish its own provenance. SearchTrace records the search parameters you supply, pairs them with the receipt, and fixes the file bytes with SHA-256 so the package can be re-checked without re-running anything.</p>
+      </div>
+    </section>
+
+    <section id="builder" class="builder shell">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Free browser tool</p>
+          <h2>UCC Search Evidence Pack Builder</h2>
+        </div>
+        <p>Runs entirely in your browser. Enter the fields exactly as they appear on the official report, then export a local JSON manifest. Nothing is uploaded, and no account is required.</p>
+      </div>
+
+      <form id="manifest-form" novalidate>
+        <fieldset>
+          <legend><span>01</span> Search identity</legend>
+          <div class="field-grid">
+            <label>Debtor name exactly as submitted
+              <input name="debtorName" maxlength="180" required placeholder="Example Holdings LLC">
+            </label>
+            <label>Debtor type
+              <select name="debtorType" required>
+                <option value="">Choose one</option>
+                <option value="organization">Organization</option>
+                <option value="individual">Individual</option>
+              </select>
+            </label>
+            <label>Jurisdiction
+              <input name="jurisdiction" maxlength="80" required placeholder="California">
+            </label>
+            <label>Filing office
+              <input name="filingOffice" maxlength="180" required placeholder="Secretary of State, UCC Division">
+            </label>
+            <label class="wide">Official source URL
+              <input name="officialSourceUrl" type="url" required placeholder="https://official-state-site.example/ucc">
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span>02</span> Report boundaries</legend>
+          <div class="field-grid">
+            <label>Report date
+              <input name="reportDate" type="date" required>
+            </label>
+            <label>Official through date
+              <input name="throughDate" type="date" required>
+            </label>
+            <label>Search or certificate identifier
+              <input name="searchIdentifier" maxlength="120" required placeholder="As printed on the report">
+            </label>
+            <label>Receipt or fee identifier
+              <input name="receiptIdentifier" maxlength="120" required placeholder="As printed on the receipt">
+            </label>
+            <label>Fee as shown
+              <input name="feePaid" maxlength="60" placeholder="$15.00">
+            </label>
+            <label>Search logic as shown
+              <select name="searchLogic">
+                <option value="unknown">Unknown / not printed</option>
+                <option value="standard_exact">Standard exact-name logic</option>
+                <option value="nonstandard_variants">Non-standard or variant search</option>
+                <option value="other">Other — describe in scope notes</option>
+              </select>
+            </label>
+            <label>Name variants documented
+              <input name="nameVariants" maxlength="300" placeholder="List searched variants or state that none are shown">
+            </label>
+            <label>Returned-record count as shown
+              <input name="resultCount" inputmode="numeric" maxlength="20" placeholder="0, 1, 2…">
+            </label>
+            <label class="wide">Search scope and exclusions
+              <textarea name="scopeNotes" rows="4" maxlength="1200" required placeholder="Record only what the official report says was searched and any stated exclusions. Do not infer clearance."></textarea>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span>03</span> Local file inventory</legend>
+          <div class="file-drop">
+            <label for="evidence-files"><strong>Select the official report, receipt, and supporting files</strong><span>SHA-256 is calculated locally. The files never leave this browser.</span></label>
+            <input id="evidence-files" type="file" multiple>
+            <p id="hash-status" role="status"></p>
+          </div>
+          <div id="files-panel" class="file-panel" hidden>
+            <table>
+              <thead><tr><th>File</th><th>Role</th><th>Size</th><th>SHA-256</th></tr></thead>
+              <tbody id="file-table"></tbody>
+            </table>
+          </div>
+          <p class="safety-note"><strong>Do not select</strong> files containing Social Security numbers, bank account numbers, cardholder data, credentials, or unrelated customer records.</p>
+        </fieldset>
+
+        <div class="form-actions">
+          <button class="button primary" type="submit">Assess and build manifest</button>
+          <button class="button ghost" type="reset">Clear local data</button>
+        </div>
+      </form>
+
+      <section id="results" class="results" aria-live="polite" hidden>
+        <div class="result-heading">
+          <div><p class="section-label">Local result</p><h2 id="result-label">Manifest needs more input</h2></div>
+          <button id="download-manifest" class="button secondary" type="button">Download JSON manifest</button>
+        </div>
+        <div class="result-grid">
+          <div><h3>Required metadata</h3><ul id="missing-list"></ul></div>
+          <div><h3>Scope cautions</h3><ul id="caution-list"></ul></div>
+        </div>
+        <details><summary>Preview the manifest</summary><pre id="manifest-preview"></pre></details>
+      </section>
+    </section>
+
+    <section id="method" class="method-section">
+      <div class="shell">
+        <div class="section-heading inverted">
+          <div><p class="section-label">How a pack is built</p><h2>Preserve the official output. Do not reinterpret it.</h2></div>
+          <p>We work only from what you send: the official filing-office search report, the receipt, and your manifest. We transcribe the search parameters exactly as they appear, compute SHA-256 for every file, and assemble a scope summary. We do not re-run the search, contact the filing office, or interpret what the results mean.</p>
+        </div>
+        <div class="method-grid">
+          <article><span>01</span><h3>Describe</h3><p>Keep the exact debtor name, jurisdiction, filing office, report date, and official through date.</p></article>
+          <article><span>02</span><h3>Inventory</h3><p>Pair the report with its receipt and list every file by role, media type, byte size, and SHA-256.</p></article>
+          <article><span>03</span><h3>Bound</h3><p>State the search logic and exclusions printed by the source. Unknown stays unknown.</p></article>
+          <article><span>04</span><h3>Re-check</h3><p>Recompute hashes later to determine whether the received files are byte-identical.</p></article>
+        </div>
+        <div class="official-links">
+          <p class="section-label">Official reference points</p>
+          <a href="https://www.sos.ca.gov/administration/regulations/current-regulations/business/uniform-commercial-code">California UCC regulations <span>↗</span></a>
+          <a href="https://www.sos.texas.gov/ucc/formfees.shtml">Texas UCC fees <span>↗</span></a>
+          <a href="https://dos.ny.gov/ucc-fee-schedule">New York UCC fees <span>↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="scope" class="scope-section shell">
+      <div class="scope-card">
+        <p class="section-label">Scope boundary</p>
+        <h2>An evidence pack is not a lien conclusion.</h2>
+        <p>SearchTrace organizes and seals documents you already obtained. It is not a legal opinion, a title report, a certified government search, a lien-clearance conclusion, or a guarantee that no filing exists. We do not validate your debtor-name search logic or name variants, assess whether the filing office's index is complete, determine lien priority, or address fixtures, real-property records, tax or judgment liens, or bankruptcy. Nothing in the pack speaks to filings made after the official through date printed on your report. Credit, perfection, and priority decisions remain yours and your counsel's.</p>
+      </div>
+    </section>
+
+    <section id="offer" class="offer-section shell">
+      <div class="offer-copy">
+        <p class="section-label">Fixed-scope offer test</p>
+        <h2>Scoped Evidence Pack — $249</h2>
+        <p>$249 once, for one debtor in one U.S. jurisdiction, covering one official search report and its receipt. No subscription, no retainer, no per-seat pricing. Additional debtors or jurisdictions are separate packs, quoted before any work begins.</p>
+        <a class="button primary" href="https://ustechautomations.github.io/ucc-search-evidence-pack/offers/ucc-search-evidence-pack/">Request the scoped pack</a>
+        <p class="offer-caveat">No checkout is exposed while this offer is being tested. Requesting scope creates no contract or payment.</p>
+      </div>
+      <div class="deliverable-card">
+        <p class="card-kicker">What arrives</p>
+        <ul>
+          <li><span>01</span><div><strong>PDF evidence summary</strong><small>Exact search scope and official through date</small></div></li>
+          <li><span>02</span><div><strong>JSON manifest</strong><small>Machine-readable fields for the decision file</small></div></li>
+          <li><span>03</span><div><strong>SHA-256 inventory</strong><small>Hash and byte size for every received file</small></div></li>
+          <li><span>04</span><div><strong>Original files</strong><small>Returned unaltered alongside the pack</small></div></li>
+        </ul>
+        <p><strong>Timing:</strong> within two business days after complete intake.</p>
+        <p><strong>Cancellation:</strong> cancellable before kickoff. Work starts only after scope and intake are confirmed.</p>
+      </div>
+    </section>
+
+    <section class="path-section">
+      <div class="shell">
+        <p class="section-label">Proof to paid work</p>
+        <div class="path-grid">
+          <div><span>1</span><h3>Build</h3><p>Enter the official search details and download the JSON manifest locally.</p></div>
+          <div><span>2</span><h3>Request</h3><p>Open the product-specific request page and describe one debtor in one jurisdiction.</p></div>
+          <div><span>3</span><h3>Receive</h3><p>Get the PDF summary, JSON manifest, and hash inventory within two business days after complete intake.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <div><strong>SearchTrace</strong><p>A browser-only evidence tool from US Tech Automations.</p></div>
+      <div><a href="https://github.com/USTechAutomations/ucc-search-evidence-pack">Source code</a><a href="https://ustechautomations.com/privacy">Privacy</a><a href="https://ustechautomations.github.io/ucc-search-evidence-pack/offers/ucc-search-evidence-pack/">Request a pack</a></div>
+    </div>
+  </footer>
+
+  <script type="module" src="app.mjs"></script>
+</body>
+</html>
