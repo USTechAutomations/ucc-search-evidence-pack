@@ -1,0 +1,8 @@
+{
+  "canonical_standard": "USTechAutomations/usta-paid-surfaces:BRAND.md",
+  "source_docx_sha256": "4647e3f218b90f24e342c7914d42fc398bd082f5e24f392682032fb61d593f64",
+  "source_snapshot": "USTA shared static brand snapshot from design rules v1.3, 2026-09-08",
+  "styles_sha256": "eef027c587993f0085df3d731dabb24eea58ad438cade0d92e844f6e852b7dc8",
+  "font_sha256": "e739aff9b4d02c264341d6d4872edcda28e79373aeda936f659566a1cd3eb47f",
+  "scope": "Shared USTA static shell and tokens; same-origin assets. legacy.css adapts existing control and layout classes. Product scripts, prices and output algorithms preserved."
+}
